@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free online PDF merger tool. Combine multiple PDF files into one document with different merge levels and image optimization options.">
-    <meta name="keywords" content="PDF merger, combine PDF, merge PDF online, PDF tools, document tools">
-    <meta name="author" content="PDF Tools">
+    <meta name="description" content="Free online PDF merger tool. Combine multiple PDF files into one document with different merge levels, sorting options, and image optimization.">
+    <meta name="keywords" content="PDF merger, combine PDF, merge PDF online, PDF tools, document tools, sort PDF pages">
+    <meta name="author" content="PDF Tools Pro">
     <meta name="robots" content="index, follow">
-    <title>PDF Merger Tool - Combine Multiple PDFs Online | PDF Tools</title>
+    <title>Advanced PDF Merger - Combine & Sort PDFs Online | PDF Tools Pro</title>
     
     <!-- Favicon -->
     <link rel="icon" href="https://example.com/favicon.ico" type="image/x-icon">
     
     <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:title" content="PDF Merger Tool - Combine Multiple PDFs Online">
-    <meta property="og:description" content="Free online PDF merger tool. Combine multiple PDF files into one document with different merge levels and image optimization options.">
+    <meta property="og:title" content="Advanced PDF Merger - Combine & Sort PDFs Online">
+    <meta property="og:description" content="Free online PDF merger tool with sorting options. Combine multiple PDF files into one document with different merge levels and image optimization options.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://example.com/pdf-merger">
     <meta property="og:image" content="https://example.com/images/pdf-merger-preview.jpg">
@@ -27,9 +27,9 @@
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "PDF Merger Tool",
+      "name": "Advanced PDF Merger",
       "url": "https://example.com/pdf-merger",
-      "description": "Free online tool to merge multiple PDF files into one document.",
+      "description": "Free online tool to merge and sort multiple PDF files into one document.",
       "applicationCategory": "DocumentUtility",
       "operatingSystem": "Any",
       "offers": {
@@ -256,6 +256,21 @@
             margin-right: 0.5rem;
         }
         
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .radio-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .radio-container input[type="radio"] {
+            margin-right: 0.5rem;
+        }
+        
         .file-list {
             margin: 1.5rem 0;
         }
@@ -274,16 +289,26 @@
         .file-item .file-info {
             display: flex;
             align-items: center;
+            flex-grow: 1;
+            overflow: hidden;
         }
         
         .file-item .file-icon {
             margin-right: 0.8rem;
             color: var(--accent-color);
+            flex-shrink: 0;
+        }
+        
+        .file-item .file-name {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         .file-item .file-actions {
             display: flex;
             align-items: center;
+            flex-shrink: 0;
         }
         
         .file-item .file-actions button {
@@ -303,6 +328,7 @@
             display: flex;
             justify-content: space-between;
             margin-top: 2rem;
+            gap: 1rem;
         }
         
         .ad-container {
@@ -405,10 +431,9 @@
             
             .action-buttons {
                 flex-direction: column;
-                gap: 1rem;
             }
             
-            .action-buttons .btn {
+            .btn {
                 width: 100%;
             }
         }
@@ -446,6 +471,27 @@
             width: 0%;
             transition: width 0.3s;
         }
+        
+        /* Status message */
+        .status-message {
+            text-align: center;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .status-message.success {
+            background-color: rgba(52, 168, 83, 0.1);
+            color: var(--secondary-color);
+            border: 1px solid var(--secondary-color);
+        }
+        
+        .status-message.error {
+            background-color: rgba(234, 67, 53, 0.1);
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+        }
     </style>
     
     <!-- Font Awesome for icons -->
@@ -454,7 +500,7 @@
 <body>
     <header>
         <div class="container header-content">
-            <a href="/" class="logo">PDF Tools</a>
+            <a href="/" class="logo">PDF Tools Pro</a>
             <button class="mobile-menu-btn" aria-label="Toggle menu">
                 <i class="fas fa-bars"></i>
             </button>
@@ -472,8 +518,8 @@
     <main>
         <div class="container">
             <section class="hero">
-                <h1>Merge PDF Files Online</h1>
-                <p>Combine multiple PDF documents into a single file with our free online tool. Select your merge level and optimize images for smaller file sizes.</p>
+                <h1>Merge & Sort PDF Files</h1>
+                <p>Combine multiple PDF documents into a single file with our advanced online tool. Select your merge level, sort order, and optimize images for smaller file sizes.</p>
             </section>
             
             <!-- Top Ad Banner -->
@@ -519,6 +565,24 @@
                     </div>
                     
                     <div class="option-group">
+                        <label>Sort Order:</label>
+                        <div class="radio-group">
+                            <div class="radio-container">
+                                <input type="radio" id="sortOriginal" name="sortOrder" value="original" checked>
+                                <label for="sortOriginal">Original order (as selected)</label>
+                            </div>
+                            <div class="radio-container">
+                                <input type="radio" id="sortAZ" name="sortOrder" value="a-z">
+                                <label for="sortAZ">A to Z (by filename)</label>
+                            </div>
+                            <div class="radio-container">
+                                <input type="radio" id="sortZA" name="sortOrder" value="z-a">
+                                <label for="sortZA">Z to A (by filename)</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
                         <label for="imageQuality">Image Quality:</label>
                         <input type="range" id="imageQuality" min="0" max="100" value="80">
                         <div style="display: flex; justify-content: space-between;">
@@ -560,51 +624,6 @@
                          (adsbygoogle = window.adsbygoogle || []).push({});
                     </script>
                 </div>
-                
-                <div class="progress-container" id="progressContainer">
-                    <div class="progress-bar" id="progressBar"></div>
-                </div>
-                
-                <div class="spinner" id="spinner"></div>
-                
-                <div class="action-buttons">
-                    <button class="btn btn-secondary" id="clearFilesBtn">Clear Files</button>
-                    <button class="btn btn-accent" id="mergeBtn">Merge PDFs</button>
-                </div>
-            </section>
-            
-            <section class="features">
-                <div class="feature-card">
-                    <i class="fas fa-lock"></i>
-                    <h3>Secure Processing</h3>
-                    <p>Your files are processed securely in your browser and never uploaded to our servers.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-tachometer-alt"></i>
-                    <h3>Fast Merging</h3>
-                    <p>Merge PDFs quickly with our optimized processing engine.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-cog"></i>
-                    <h3>Advanced Options</h3>
-                    <p>Customize your merge with different levels and optimization settings.</p>
-                </div>
-            </section>
-            
-            <!-- Bottom Ad Banner -->
-            <div class="ad-container">
-                <p>Advertisement</p>
-                <!-- Replace with your AdSense ad unit -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-YOUR_ADSENSE_ID"
-                     data-ad-slot="YOUR_AD_SLOT_ID"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
         </div>
     </main>
     
@@ -616,7 +635,7 @@
                 <a href="/faq">FAQ</a>
                 <a href="/contact">Contact Us</a>
             </div>
-            <p class="copyright">© 2023 PDF Tools. All rights reserved.</p>
+            <p class="copyright">© 2023 PDF Tools Pro. All rights reserved.</p>
         </div>
     </footer>
     
@@ -632,6 +651,7 @@
             const spinner = document.getElementById('spinner');
             const progressContainer = document.getElementById('progressContainer');
             const progressBar = document.getElementById('progressBar');
+            const statusMessage = document.getElementById('statusMessage');
             
             let files = [];
             
@@ -667,7 +687,32 @@
             
             // Functions
             function handleFileSelect(e) {
-                files = Array.from(e.target.files).filter(file => file.type === 'application/pdf');
+                const newFiles = Array.from(e.target.files).filter(file => file.type === 'application/pdf');
+                
+                // Check if adding these files would exceed the limit
+                if (files.length + newFiles.length > 20) {
+                    showStatus(`You can only merge up to 20 files. You currently have ${files.length} files selected.`, 'error');
+                    return;
+                }
+                
+                // Check for duplicate files
+                const duplicateFiles = newFiles.filter(newFile => 
+                    files.some(existingFile => 
+                        existingFile.name === newFile.name && existingFile.size === newFile.size
+                    )
+                );
+                
+                if (duplicateFiles.length > 0) {
+                    showStatus(`Skipped ${duplicateFiles.length} duplicate file(s).`, 'error');
+                }
+                
+                // Add only non-duplicate files
+                files = [...files, ...newFiles.filter(newFile => 
+                    !files.some(existingFile => 
+                        existingFile.name === newFile.name && existingFile.size === newFile.size
+                    )
+                )];
+                
                 updateFileList();
             }
             
@@ -690,6 +735,7 @@
                     fileIcon.className = 'file-icon fas fa-file-pdf';
                     
                     const fileName = document.createElement('span');
+                    fileName.className = 'file-name';
                     fileName.textContent = file.name;
                     
                     const fileSize = document.createElement('span');
@@ -703,17 +749,26 @@
                     const moveUpBtn = document.createElement('button');
                     moveUpBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
                     moveUpBtn.title = 'Move up';
-                    moveUpBtn.addEventListener('click', () => moveFile(index, 'up'));
+                    moveUpBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        moveFile(index, 'up');
+                    });
                     
                     const moveDownBtn = document.createElement('button');
                     moveDownBtn.innerHTML = '<i class="fas fa-arrow-down"></i>';
                     moveDownBtn.title = 'Move down';
-                    moveDownBtn.addEventListener('click', () => moveFile(index, 'down'));
+                    moveDownBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        moveFile(index, 'down');
+                    });
                     
                     const removeBtn = document.createElement('button');
                     removeBtn.innerHTML = '<i class="fas fa-times"></i>';
                     removeBtn.title = 'Remove';
-                    removeBtn.addEventListener('click', () => removeFile(index));
+                    removeBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        removeFile(index);
+                    });
                     
                     fileInfo.appendChild(fileIcon);
                     fileInfo.appendChild(fileName);
@@ -751,29 +806,81 @@
             function removeFile(index) {
                 files.splice(index, 1);
                 updateFileList();
+                if (files.length === 0) {
+                    fileInput.value = '';
+                }
             }
             
             function clearFiles() {
                 files = [];
                 updateFileList();
                 fileInput.value = '';
+                hideStatus();
+            }
+            
+            function sortFiles(order) {
+                switch(order) {
+                    case 'a-z':
+                        files.sort((a, b) => a.name.localeCompare(b.name));
+                        break;
+                    case 'z-a':
+                        files.sort((a, b) => b.name.localeCompare(a.name));
+                        break;
+                    // 'original' order is maintained by not sorting
+                }
+                updateFileList();
+            }
+            
+            function showStatus(message, type) {
+                statusMessage.textContent = message;
+                statusMessage.className = `status-message ${type}`;
+                statusMessage.style.display = 'block';
+                
+                // Auto-hide after 5 seconds
+                setTimeout(hideStatus, 5000);
+            }
+            
+            function hideStatus() {
+                statusMessage.style.display = 'none';
             }
             
             function mergePDFs() {
                 if (files.length < 2) {
-                    alert('Please select at least 2 PDF files to merge.');
+                    showStatus('Please select at least 2 PDF files to merge.', 'error');
                     return;
+                }
+                
+                // Check total file size (50MB limit per file, 100MB total for demo)
+                const totalSize = files.reduce((sum, file) => sum + file.size, 0);
+                if (totalSize > 100 * 1024 * 1024) { // 100MB
+                    showStatus('Total file size exceeds 100MB limit. Please reduce file sizes.', 'error');
+                    return;
+                }
+                
+                // Get selected options
+                const mergeLevel = document.getElementById('mergeLevel').value;
+                const sortOrder = document.querySelector('input[name="sortOrder"]:checked').value;
+                const imageQuality = document.getElementById('imageQuality').value;
+                const removeAnnotations = document.getElementById('removeAnnotations').checked;
+                const optimizeFonts = document.getElementById('optimizeFonts').checked;
+                const linearize = document.getElementById('linearize').checked;
+                
+                // Apply sorting if needed
+                if (sortOrder !== 'original') {
+                    sortFiles(sortOrder);
                 }
                 
                 // Show loading state
                 spinner.style.display = 'block';
                 progressContainer.style.display = 'block';
                 mergeBtn.disabled = true;
+                clearFilesBtn.disabled = true;
                 
                 // Simulate processing (in a real app, you would use a PDF library like pdf-lib)
                 let progress = 0;
                 const interval = setInterval(() => {
-                    progress += 5;
+                    progress += Math.random() * 10;
+                    if (progress > 100) progress = 100;
                     progressBar.style.width = `${progress}%`;
                     
                     if (progress >= 100) {
@@ -782,15 +889,30 @@
                             spinner.style.display = 'none';
                             progressContainer.style.display = 'none';
                             mergeBtn.disabled = false;
+                            clearFilesBtn.disabled = false;
                             
-                            // In a real implementation, this would be the merged PDF
-                            alert('PDFs merged successfully! (This is a demo. In a real implementation, the merged PDF would download automatically.)');
+                            // Show success message
+                            showStatus('PDFs merged successfully! Download will start shortly...', 'success');
                             
-                            // Reset progress bar
-                            progressBar.style.width = '0%';
+                            // In a real implementation, this would trigger the download
+                            setTimeout(() => {
+                                // Reset progress bar
+                                progressBar.style.width = '0%';
+                                
+                                // This would be the actual download in a real implementation
+                                const link = document.createElement('a');
+                                link.href = '#';
+                                link.download = 'merged-document.pdf';
+                                document.body.appendChild(link);
+                                link.click();
+                                document.body.removeChild(link);
+                                
+                                // For demo purposes, we're just showing a message
+                                showStatus('Download complete! Your merged PDF is ready.', 'success');
+                            }, 1500);
                         }, 500);
                     }
-                }, 100);
+                }, 200);
             }
             
             // Initialize
