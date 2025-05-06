@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online tool to remove backgrounds from images instantly. No registration required. Supports PNG, JPG, JPEG formats.">
+    <meta name="keywords" content="background remover, remove bg, transparent background, image editor, free photo tool">
+    <meta name="author" content="Background Remover Tool">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Free Online Background Remover Tool">
+    <meta property="og:description" content="Remove backgrounds from your images in seconds with our free online tool.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.yourwebsite.com">
+    <meta property="og:image" content="https://www.yourwebsite.com/preview.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.yourwebsite.com">
+    
+    <title>Free Online Background Remover Tool | Instant PNG, JPG Support</title>
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Background Remover Tool",
+      "url": "https://www.yourwebsite.com",
+      "description": "Free online tool to remove backgrounds from images instantly.",
+      "applicationCategory": "ImageEditor",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+    
+    <style>
+        :root {
+            --primary-color: #4a6bff;
+            --secondary-color: #f8f9fa;
+            --accent-color: #ff6b6b;
+            --text-color: #333;
+            --light-text: #777;
+            --border-color: #ddd;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .main-content {
+            padding: 2rem 0;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+            background-color: white;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .hero p {
+            color: var(--light-text);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .tool-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+        
+        .upload-area {
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 3rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 1.5rem;
+        }
+        
+        .upload-area:hover {
+            border-color: var(--primary-color);
+            background-color: rgba(74, 107, 255, 0.05);
+        }
+        
+        .upload-area i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .upload-area p {
+            color: var(--light-text);
+        }
+        
+        .upload-area.active {
+            border-color: var(--primary-color);
+            background-color: rgba(74, 107, 255, 0.05);
+        }
+        
+        #fileInput {
+            display: none;
+        }
+        
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .option-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .option-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .option-group select, .option-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: white;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #3a5ae8;
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e9ecef;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .preview-container {
+            display: none;
+            margin-top: 2rem;
+        }
+        
+        .preview-title {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .preview-images {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        
+        .image-box {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        
+        .image-box h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .image-preview {
+            max-width: 100%;
+            max-height: 400px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            box-shadow: var(--shadow);
+        }
+        
+        .download-btn {
+            margin-top: 1rem;
+        }
+        
+        .ad-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 2rem 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        
+        .ad-placeholder {
+            background-color: var(--secondary-color);
+            padding: 2rem;
+            border: 1px dashed var(--border-color);
+            color: var(--light-text);
+        }
+        
+        footer {
+            background-color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section ul li a {
+            text-decoration: none;
+            color: var(--light-text);
+            transition: color 0.3s;
+        }
+        
+        .footer-section ul li a:hover {
+            color: var(--primary-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--light-text);
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 0.75rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .preview-images {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .image-box {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-content {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            
+            nav {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+        
+        /* Loading spinner */
+        .spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            margin: 2rem auto;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid var(--primary-color);
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            border-radius: 4px;
+            box-shadow: var(--shadow);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">BG Remover</a>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">How It Works</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="main-content">
+        <div class="container">
+            <!-- Top Ad Banner -->
+            <div class="ad-container">
+                <!-- Replace with your Google AdSense code -->
+                <div class="ad-placeholder">
+                    <h3>Advertisement</h3>
+                    <p>Google AdSense Banner (728x90)</p>
+                    <!-- Sample AdSense code (replace with your own) -->
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID"
+                     crossorigin="anonymous"></script>
+                    <!-- Your Ad Unit -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+                         data-ad-slot="YOUR_AD_SLOT_ID"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            </div>
+            
+            <section class="hero">
+                <h1>Remove Background from Images</h1>
+                <p>Upload your image and our AI will automatically remove the background in seconds. 100% free with no watermarks.</p>
+            </section>
+            
+            <section class="tool-container">
+                <div class="upload-area" id="uploadArea">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h2>Drag & Drop Your Image Here</h2>
+                    <p>or click to browse files (PNG, JPG, JPEG)</p>
+                    <input type="file" id="fileInput" accept="image/*">
+                </div>
+                
+                <div class="options">
+                    <div class="option-group">
+                        <label for="outputFormat">Output Format</label>
+                        <select id="outputFormat">
+                            <option value="png">PNG (Transparent)</option>
+                            <option value="jpg">JPG (White Background)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="option-group">
+                        <label for="imageQuality">Image Quality</label>
+                        <select id="imageQuality">
+                            <option value="high">High Quality</option>
+                            <option value="medium" selected>Medium Quality</option>
+                            <option value="low">Low Quality (Smaller File)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="option-group">
+                        <label for="imageSize">Resize Output</label>
+                        <select id="imageSize">
+                            <option value="original">Original Size</option>
+                            <option value="1024">1024px (max width)</option>
+                            <option value="800">800px (max width)</option>
+                            <option value="640">640px (max width)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-primary" id="removeBgBtn" disabled>
+                        <i class="fas fa-magic"></i> Remove Background
+                    </button>
+                    <button class="btn btn-secondary" id="resetBtn" disabled>
+                        <i class="fas fa-redo"></i> Reset
+                    </button>
+                </div>
+                
+                <div class="spinner" id="spinner"></div>
+                
+                <div class="preview-container" id="previewContainer">
+                    <h2 class="preview-title">Your Result</h2>
+                    <div class="preview-images">
+                        <div class="image-box">
+                            <h3>Original Image</h3>
+                            <img id="originalImage" class="image-preview" src="" alt="Original image">
+                        </div>
+                        <div class="image-box">
+                            <h3>Background Removed</h3>
+                            <img id="resultImage" class="image-preview" src="" alt="Background removed result">
+                            <button class="btn btn-primary download-btn" id="downloadBtn">
+                                <i class="fas fa-download"></i> Download Image
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Middle Ad Banner -->
+            <div class="ad-container">
+                <div class="ad-placeholder">
+                    <h3>Advertisement</h3>
+                    <p>Google AdSense Rectangle (300x250)</p>
+                    <!-- Sample AdSense code (replace with your own) -->
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID"
+                     crossorigin="anonymous"></script>
+                    <!-- Your Ad Unit -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+                         data-ad-slot="YOUR_AD_SLOT_ID"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            </div>
+            
+            <section class="tool-info">
+                <h2>How to Remove Background from Images</h2>
+                <p>Our free online background remover tool makes it easy to create transparent background images in just a few clicks:</p>
+                <ol>
+                    <li><strong>Upload your image</strong> - Drag and drop your JPG or PNG file into the upload area above</li>
+                    <li><strong>Adjust settings</strong> - Choose your preferred output format and quality settings</li>
+                    <li><strong>Remove background</strong> - Click the "Remove Background" button and wait a few seconds</li>
+                    <li><strong>Download result</strong> - Save your new image with transparent background</li>
+                </ol>
+                
+                <h3>Why Use Our Background Remover?</h3>
+                <ul>
+                    <li>100% free with no watermarks</li>
+                    <li>No registration required</li>
+                    <li>Fast processing with AI technology</li>
+                    <li>High-quality results with clean edges</li>
+                    <li>Works with product photos, portraits, logos and more</li>
+                </ul>
+            </section>
+            
+            <!-- Bottom Ad Banner -->
+            <div class="ad-container">
+                <div class="ad-placeholder">
+                    <h3>Advertisement</h3>
+                    <p>Google AdSense Leaderboard (970x90)</p>
+                    <!-- Sample AdSense code (replace with your own) -->
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID"
+                     crossorigin="anonymous"></script>
+                    <!-- Your Ad Unit -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+                         data-ad-slot="YOUR_AD_SLOT_ID"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>BG Remover</h3>
+                    <p>Free online tool to remove backgrounds from images instantly. No registration required.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">How It Works</a></li>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <ul>
+                        <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                        <li><a href="#"><i class="fab fa-pinterest"></i> Pinterest</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; <span id="currentYear"></span> BG Remover Tool. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // Current year for copyright
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // DOM elements
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const removeBgBtn = document.getElementById('removeBgBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const previewContainer = document.getElementById('previewContainer');
+        const originalImage = document.getElementById('originalImage');
+        const resultImage = document.getElementById('resultImage');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const spinner = document.getElementById('spinner');
+        const toast = document.getElementById('toast');
+        
+        // File handling
+        let selectedFile = null;
+        
+        // Upload area click event
+        uploadArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+        
+        // Drag and drop events
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('active');
+        });
+        
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('active');
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('active');
+            
+            if (e.dataTransfer.files.length) {
+                handleFile(e.dataTransfer.files[0]);
+            }
+        });
+        
+        // File input change event
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length) {
+                handleFile(fileInput.files[0]);
+            }
+        });
+        
+        // Handle selected file
+        function handleFile(file) {
+            // Check if file is an image
+            if (!file.type.match('image.*')) {
+                showToast('Please select an image file (JPG, PNG)');
+                return;
+            }
+            
+            // Check file size (max 5MB)
+            if (file.size > 5 * 1024 * 1024) {
+                showToast('Image size should be less than 5MB');
+                return;
+            }
+            
+            selectedFile = file;
+            
+            // Display preview
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                originalImage.src = e.target.result;
+                previewContainer.style.display = 'block';
+                removeBgBtn.disabled = false;
+                resetBtn.disabled = false;
+            };
+            reader.readAsDataURL(file);
+            
+            showToast('Image uploaded successfully');
+        }
+        
+        // Remove background button click
+        removeBgBtn.addEventListener('click', () => {
+            if (!selectedFile) return;
+            
+            // Show loading spinner
+            spinner.style.display = 'block';
+            removeBgBtn.disabled = true;
+            
+            // Simulate background removal (in a real app, you would call an API here)
+            setTimeout(() => {
+                // For demo purposes, we'll just use the original image
+                // In a real implementation, you would process the image
+                resultImage.src = originalImage.src;
+                
+                spinner.style.display = 'none';
+                removeBgBtn.disabled = false;
+                showToast('Background removed successfully!');
+                
+                // Scroll to result
+                previewContainer.scrollIntoView({ behavior: 'smooth' });
+            }, 2000);
+        });
+        
+        // Reset button click
+        resetBtn.addEventListener('click', () => {
+            selectedFile = null;
+            fileInput.value = '';
+            originalImage.src = '';
+            resultImage.src = '';
+            previewContainer.style.display = 'none';
+            removeBgBtn.disabled = true;
+            resetBtn.disabled = true;
+        });
+        
+        // Download button click
+        downloadBtn.addEventListener('click', () => {
+            if (!resultImage.src) return;
+            
+            // Create a temporary link
+            const link = document.createElement('a');
+            link.href = resultImage.src;
+            
+            // Set download filename
+            const outputFormat = document.getElementById('outputFormat').value;
+            const originalName = selectedFile.name.split('.')[0];
+            link.download = `${originalName}_nobg.${outputFormat}`;
+            
+            // Trigger download
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            showToast('Download started!');
+        });
+        
+        // Show toast notification
+        function showToast(message) {
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const nav = document.querySelector('nav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            nav.style.display = nav.style.display === 'block' ? 'none' : 'block';
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('nav') && !e.target.closest('.mobile-menu-btn')) {
+                nav.style.display = 'none';
+            }
+        });
+        
+        // Responsive adjustments
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 480) {
+                nav.style.display = '';
+            }
+        });
+    </script>
+    
+    <!-- Google Analytics (optional) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+</body>
+</html>
